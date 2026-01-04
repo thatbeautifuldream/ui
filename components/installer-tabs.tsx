@@ -14,7 +14,7 @@ type TInstallerTabsProps = {
   className?: string;
 };
 
-type ComponentFile = {
+type TComponentFile = {
   path: string;
   content: string;
   type: string;
@@ -25,7 +25,7 @@ export function InstallerTabs({
   className,
 }: TInstallerTabsProps) {
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
-  const [componentFiles, setComponentFiles] = useState<ComponentFile[]>([]);
+  const [componentFiles, setComponentFiles] = useState<TComponentFile[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
