@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Copy, Check } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 import {
   PACKAGE_MANAGERS,
   generateInstallerCommand,
@@ -13,11 +14,35 @@ type TInstallerTabsProps = {
   className?: string;
 };
 
+type ComponentFile = {
+  path: string;
+  content: string;
+  type: string;
+};
+
 export function InstallerTabs({
   componentName,
   className,
 }: TInstallerTabsProps) {
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
+  const [componentFiles, setComponentFiles] = useState<ComponentFile[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchComponentData() {
+      try {
+        const response = await fetch(`/r/${componentName}.json`);
+        const data = await response.json();
+        setComponentFiles(data.files || []);
+      } catch (error) {
+        console.error("Failed to fetch component data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchComponentData();
+  }, [componentName]);
 
   const copyToClipboard = async (command: string) => {
     try {
@@ -37,6 +62,7 @@ export function InstallerTabs({
             {pm.name}
           </TabsTrigger>
         ))}
+        <TabsTrigger value="manual">manual</TabsTrigger>
       </TabsList>
 
       {PACKAGE_MANAGERS.map((pm) => {
@@ -48,7 +74,7 @@ export function InstallerTabs({
               <button
                 type="button"
                 onClick={() => copyToClipboard(command)}
-                className="flex items-center gap-1 px-2 py-1 text-xs hover:bg-fd-muted/50 rounded transition-colors"
+                className="flex items-center gap-1 px-2 py-1 text-xs hover:bg-fd-muted/50 rounded transition-colors cursor-pointer"
                 title="Copy command"
               >
                 {copiedCommand === command ? (
@@ -67,6 +93,49 @@ export function InstallerTabs({
           </TabsContent>
         );
       })}
+
+      <TabsContent value="manual">
+        {loading ? (
+          <div className="text-sm text-muted-foreground py-4">
+            Loading component code...
+          </div>
+        ) : componentFiles.length > 0 ? (
+          <div className="space-y-6">
+            <p className="text-sm text-muted-foreground">
+              Copy and paste the following code into your project.
+            </p>
+            {componentFiles.map((file, index) => {
+              const fileName = file.path.split("/").pop() || "component.tsx";
+              // Determine language from file extension
+              const getLang = (filename: string) => {
+                if (filename.endsWith(".tsx") || filename.endsWith(".jsx"))
+                  return "tsx";
+                if (filename.endsWith(".ts")) return "ts";
+                if (filename.endsWith(".js")) return "js";
+                if (filename.endsWith(".css")) return "css";
+                if (filename.endsWith(".json")) return "json";
+                return "typescript";
+              };
+
+              return (
+                <div key={file.path} className="space-y-2">
+                  <blockquote className="text-sm font-medium text-foreground bg-fd-muted/50 px-2 py-1 rounded-tl-none rounded-lg w-fit border">
+                    {fileName}
+                  </blockquote>
+                  <DynamicCodeBlock
+                    lang={getLang(fileName)}
+                    code={file.content}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="text-sm text-muted-foreground py-4">
+            No component files found.
+          </div>
+        )}
+      </TabsContent>
     </Tabs>
   );
 }
