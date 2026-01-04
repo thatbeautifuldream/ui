@@ -1,9 +1,9 @@
-export interface PackageManager {
+export type TPackageManager = {
   name: string;
   command: string;
-}
+};
 
-export const PACKAGE_MANAGERS: PackageManager[] = [
+export const PACKAGE_MANAGERS: TPackageManager[] = [
   { name: "pnpm", command: "pnpm dlx shadcn@latest add" },
   { name: "npm", command: "npx shadcn@latest add" },
   { name: "yarn", command: "yarn shadcn@latest add" },

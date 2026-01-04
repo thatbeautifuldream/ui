@@ -1,5 +1,5 @@
-import { Button } from "@/registry/new-york/ui/button"
-import { cn } from "@/lib/utils"
+import { Button } from "@/registry/new-york/ui/button";
+import { cn } from "@/lib/utils";
 
 export function OpenInV0Button({
   name,
@@ -10,7 +10,7 @@ export function OpenInV0Button({
       aria-label="Open in v0"
       size="sm"
       className={cn(
-        "shadow-none bg-black text-white hover:bg-black hover:text-white dark:bg-white dark:text-black",
+        "shadow-sm bg-linear-to-b from-neutral-700 to-neutral-950 text-background active:translate-y-0.5 hover:-translate-y-0.25 hover:shadow-md hover:brightness-105",
         className
       )}
       asChild
@@ -38,5 +38,5 @@ export function OpenInV0Button({
         </svg>
       </a>
     </Button>
-  )
+  );
 }
