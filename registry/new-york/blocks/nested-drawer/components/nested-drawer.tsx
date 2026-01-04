@@ -156,7 +156,10 @@ function Content({ title, children }: TContentProps) {
   }, [open, setOpen]);
 
   React.useEffect(() => {
-    if (!innerRef.current) return;
+    if (!innerRef.current || !open) {
+      setHeight("auto");
+      return;
+    }
 
     const measureHeight = () => {
       if (innerRef.current) {
@@ -173,7 +176,7 @@ function Content({ title, children }: TContentProps) {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [currentMenu, canGoBack]);
+  }, [currentMenu, canGoBack, open]);
 
   return (
     <>
@@ -205,7 +208,7 @@ function Content({ title, children }: TContentProps) {
             aria-label={title || "Menu drawer"}
           >
             <motion.div
-              animate={{ height: "auto" }}
+              animate={{ height }}
               transition={{
                 duration: ANIMATION_DURATION,
                 ease: EASING,
