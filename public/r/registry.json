@@ -31,7 +31,7 @@
       "dependencies": ["motion"],
       "files": [
         {
-          "path": "registry/new-york/blocks/nested-drawer/page.tsx",
+          "path": "registry/new-york/blocks/nested-drawer/nested-drawer-example.tsx",
           "type": "registry:component"
         },
         {

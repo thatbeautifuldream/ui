@@ -2,7 +2,7 @@ import { InstallerTabs } from "@/components/installer-tabs";
 import { OpenInV0Button } from "@/components/open-in-v0-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
-import NestedDrawerExample from "@/registry/new-york/blocks/nested-drawer/page";
+import NestedDrawerExample from "@/registry/new-york/blocks/nested-drawer/nested-drawer-example";
 
 const COMPONENTS = [
   {
