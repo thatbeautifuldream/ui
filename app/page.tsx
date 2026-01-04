@@ -1,10 +1,10 @@
-import * as React from "react";
-import { OpenInV0Button } from "@/components/open-in-v0-button";
-import { HelloWorld } from "@/registry/new-york/blocks/hello-world/hello-world";
-import { ExampleForm } from "@/registry/new-york/blocks/example-form/example-form";
-import PokemonPage from "@/registry/new-york/blocks/complex-component/page";
-import { ExampleCard } from "@/registry/new-york/blocks/example-with-css/example-card";
 import { InstallerTabs } from "@/components/installer-tabs";
+import { OpenInV0Button } from "@/components/open-in-v0-button";
+import { cn } from "@/lib/utils";
+import PokemonPage from "@/registry/new-york/blocks/complex-component/page";
+import { ExampleForm } from "@/registry/new-york/blocks/example-form/example-form";
+import { ExampleCard } from "@/registry/new-york/blocks/example-with-css/example-card";
+import { HelloWorld } from "@/registry/new-york/blocks/hello-world/hello-world";
 
 const COMPONENTS = [
   {
@@ -38,11 +38,11 @@ export default function Home() {
     <div className="max-w-3xl mx-auto flex flex-col min-h-svh px-4 py-8 gap-8">
       <header className="flex flex-col gap-1">
         <h1 className="text-3xl font-semibold tracking-tight">
-          Milind's UI Components
+          Milind&apos;s UI Components
         </h1>
         <p className="text-muted-foreground">
-          Milind's take on UI components. Thoughtfully designed, crafted with
-          attention to detail, and built to be yours.
+          Milind&apos;s take on UI components. Thoughtfully designed, crafted
+          with attention to detail, and built to be yours.
         </p>
       </header>
       <main className="flex flex-col flex-1 gap-8">
@@ -57,7 +57,10 @@ export default function Home() {
                   <OpenInV0Button name={name} className="w-fit" />
                 </div>
                 <div
-                  className={`flex items-center justify-center ${minHeight} relative`}
+                  className={cn(
+                    "flex items-center justify-center relative",
+                    minHeight
+                  )}
                 >
                   <Component />
                 </div>
