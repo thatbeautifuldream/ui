@@ -1,41 +1,25 @@
 import { InstallerTabs } from "@/components/installer-tabs";
 import { OpenInV0Button } from "@/components/open-in-v0-button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
-import PokemonPage from "@/registry/new-york/blocks/complex-component/page";
-import { ExampleForm } from "@/registry/new-york/blocks/example-form/example-form";
-import { ExampleCard } from "@/registry/new-york/blocks/example-with-css/example-card";
-import { HelloWorld } from "@/registry/new-york/blocks/hello-world/hello-world";
+import NestedDrawerExample from "@/registry/new-york/blocks/nested-drawer/page";
 
 const COMPONENTS = [
   {
-    name: "hello-world",
-    description: "A simple hello world component",
-    component: HelloWorld,
-    minHeight: "min-h-[400px]",
-  },
-  {
-    name: "example-form",
-    description: "A contact form with Zod validation.",
-    component: ExampleForm,
-    minHeight: "min-h-[500px]",
-  },
-  {
-    name: "complex-component",
-    description: "A complex component showing hooks, libs and components.",
-    component: PokemonPage,
-    minHeight: "min-h-[400px]",
-  },
-  {
-    name: "example-with-css",
-    description: "A login form with a CSS file.",
-    component: ExampleCard,
+    name: "nested-drawer",
+    description:
+      "A fully accessible, animated drawer component with nested navigation.",
+    component: NestedDrawerExample,
     minHeight: "min-h-[400px]",
   },
 ] as const;
 
 export default function Home() {
   return (
-    <div className="max-w-3xl mx-auto flex flex-col min-h-svh px-4 py-8 gap-8">
+    <div className="max-w-3xl mx-auto flex flex-col min-h-svh px-4 py-8 gap-8 relative">
+      <div className="absolute top-8 right-4">
+        <ThemeToggle />
+      </div>
       <header className="flex flex-col gap-1">
         <h1 className="text-3xl font-semibold tracking-tight">
           Milind&apos;s UI Components
