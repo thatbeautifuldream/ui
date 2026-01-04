@@ -104,7 +104,7 @@ export function InstallerTabs({
             <p className="text-sm text-muted-foreground">
               Copy and paste the following code into your project.
             </p>
-            {componentFiles.map((file, index) => {
+            {componentFiles.map((file) => {
               const fileName = file.path.split("/").pop() || "component.tsx";
               // Determine language from file extension
               const getLang = (filename: string) => {
