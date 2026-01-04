@@ -1,10 +1,6 @@
 "use client";
 
 import {
-  NestedDrawer,
-  TMenuItem,
-} from "@/registry/new-york/blocks/nested-drawer/components/nested-drawer";
-import {
   BookOpen,
   Briefcase,
   Building2,
@@ -17,33 +13,36 @@ import {
   Users,
 } from "lucide-react";
 
+import type { TMenuItem } from "@/registry/new-york/blocks/nested-drawer/components/nested-drawer";
+import { NestedDrawer } from "@/registry/new-york/blocks/nested-drawer/components/nested-drawer";
+
 const MENU_DATA: TMenuItem[] = [
   {
     id: "home",
     title: "Home",
     description: "Welcome to our platform",
-    icon: <HomeIcon className="size-5" />,
-    onClick: () => console.log("Home clicked"),
+    icon: HomeIcon,
+    href: "#",
   },
   {
     id: "products",
     title: "Products & Services",
     description: "Explore our offerings",
-    icon: <Package className="size-5" />,
+    icon: Package,
     children: [
       {
         id: "products-software",
         title: "Software Solutions",
         description: "Enterprise and custom software",
-        icon: <Server className="size-5" />,
-        onClick: () => console.log("Software clicked"),
+        icon: Server,
+        href: "#",
       },
       {
         id: "products-cloud",
         title: "Cloud Services",
         description: "Scalable cloud infrastructure",
-        icon: <Shield className="size-5" />,
-        onClick: () => console.log("Cloud clicked"),
+        icon: Shield,
+        href: "#",
       },
     ],
   },
@@ -51,21 +50,21 @@ const MENU_DATA: TMenuItem[] = [
     id: "company",
     title: "Company",
     description: "Learn about our organization",
-    icon: <Users className="size-5" />,
+    icon: Users,
     children: [
       {
         id: "company-about",
         title: "About Us",
         description: "Our story and mission",
-        icon: <Building2 className="size-5" />,
-        onClick: () => console.log("About Us clicked"),
+        icon: Building2,
+        href: "#",
       },
       {
         id: "company-careers",
         title: "Careers",
         description: "Join our team",
-        icon: <Briefcase className="size-5" />,
-        onClick: () => console.log("Careers clicked"),
+        icon: Briefcase,
+        href: "#",
       },
     ],
   },
@@ -73,26 +72,26 @@ const MENU_DATA: TMenuItem[] = [
     id: "resources",
     title: "Resources",
     description: "Knowledge base and materials",
-    icon: <BookOpen className="size-5" />,
-    onClick: () => console.log("Resources clicked"),
+    icon: BookOpen,
+    href: "#",
   },
   {
     id: "support",
     title: "Support",
     description: "Get help when you need it",
-    icon: <HelpCircle className="size-5" />,
-    onClick: () => console.log("Support clicked"),
+    icon: HelpCircle,
+    href: "#",
   },
   {
     id: "contact",
     title: "Contact",
     description: "Get in touch with our team",
-    icon: <Mail className="size-5" />,
-    onClick: () => console.log("Contact clicked"),
+    icon: Mail,
+    href: "#",
   },
 ];
 
-export default function NestedDrawerExample() {
+export function NestedDrawerExample() {
   return (
     <NestedDrawer initialMenu={MENU_DATA}>
       <NestedDrawer.Trigger>

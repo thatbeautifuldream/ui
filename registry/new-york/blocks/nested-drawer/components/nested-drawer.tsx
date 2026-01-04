@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import * as React from "react";
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import { ChevronRight, ChevronLeft, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const ANIMATION_DURATION = 0.4;
@@ -12,9 +13,9 @@ export type TMenuItem = {
   id: string;
   title: string;
   description?: string;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
   children?: TMenuItem[];
-  onClick?: () => void;
+  href?: string;
 };
 
 type TNestedDrawerContext = {
@@ -204,7 +205,7 @@ function Content({ title, children }: TContentProps) {
             aria-label={title || "Menu drawer"}
           >
             <motion.div
-              animate={{ height }}
+              animate={{ height: "auto" }}
               transition={{
                 duration: ANIMATION_DURATION,
                 ease: EASING,
@@ -256,42 +257,42 @@ function Menu() {
     enter: (dir: "forward" | "backward") => ({
       x: dir === "forward" ? "100%" : "-100%",
       opacity: 0,
-      filter: "blur(4px)",
     }),
     center: {
       x: 0,
       opacity: 1,
-      filter: "blur(0px)",
     },
     exit: (dir: "forward" | "backward") => ({
       x: dir === "forward" ? "-100%" : "100%",
       opacity: 0,
-      filter: "blur(4px)",
     }),
   };
 
   return (
-    <AnimatePresence initial={false} mode="popLayout" custom={direction}>
-      <motion.div
-        key={currentMenu[0]?.id || "root"}
-        custom={direction}
-        variants={variants}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        transition={{
-          duration: ANIMATION_DURATION * 0.5,
-          ease: EASING,
-        }}
-        className="space-y-1"
-        role="menu"
-        aria-orientation="vertical"
-      >
-        {currentMenu.map((item) => (
-          <MenuItem key={item.id} item={item} />
-        ))}
-      </motion.div>
-    </AnimatePresence>
+    <div className="relative overflow-hidden">
+      <AnimatePresence initial={false} mode="popLayout" custom={direction}>
+        <motion.div
+          key={currentMenu[0]?.id || "root"}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            duration: ANIMATION_DURATION * 0.5,
+            ease: EASING,
+          }}
+          // style={{ position: "relative" }}
+          className="space-y-1 relative"
+          role="menu"
+          aria-orientation="vertical"
+        >
+          {currentMenu.map((item) => (
+            <MenuItem key={item.id} item={item} />
+          ))}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 }
 
@@ -300,14 +301,15 @@ type TMenuItemProps = {
 };
 
 function MenuItem({ item }: TMenuItemProps) {
-  const { navigateToMenu } = useNestedDrawer();
+  const { navigateToMenu, setOpen } = useNestedDrawer();
   const hasChildren = item.children && item.children.length > 0;
 
   const handleClick = () => {
     if (hasChildren) {
       navigateToMenu(item.children!);
-    } else if (item.onClick) {
-      item.onClick();
+    } else if (item.href) {
+      // Close drawer when navigating to a link
+      setOpen(false);
     }
   };
 
@@ -318,25 +320,14 @@ function MenuItem({ item }: TMenuItemProps) {
     }
   };
 
-  return (
-    <motion.button
-      type="button"
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      className={cn(
-        "w-full flex items-start gap-3 px-4 py-3 rounded-lg text-left transition-colors cursor-pointer",
-        "hover:bg-accent",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
-        "active:bg-accent/80"
-      )}
-      role="menuitem"
-      aria-haspopup={hasChildren}
-      tabIndex={0}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.1 }}
-    >
-      {item.icon && (
-        <div className="shrink-0 mt-1 text-muted-foreground">{item.icon}</div>
+  const Icon = item.icon;
+
+  const content = (
+    <>
+      {Icon && (
+        <div className="shrink-0 mt-1 text-muted-foreground">
+          <Icon className="size-5" />
+        </div>
       )}
 
       <div className="flex-1 min-w-0">
@@ -353,6 +344,47 @@ function MenuItem({ item }: TMenuItemProps) {
           <ChevronRight className="w-5 h-5" />
         </div>
       )}
+    </>
+  );
+
+  const className = cn(
+    "w-full flex items-start gap-3 px-4 py-3 rounded-lg text-left transition-colors cursor-pointer",
+    "hover:bg-accent",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
+    "active:bg-accent/80"
+  );
+
+  // Render as Link if href is provided and no children
+  if (item.href && !hasChildren) {
+    return (
+      <motion.div whileTap={{ scale: 0.98 }} transition={{ duration: 0.1 }}>
+        <Link
+          href={item.href}
+          onClick={handleClick}
+          className={className}
+          role="menuitem"
+          tabIndex={0}
+        >
+          {content}
+        </Link>
+      </motion.div>
+    );
+  }
+
+  // Render as button for items with children
+  return (
+    <motion.button
+      type="button"
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      className={className}
+      role="menuitem"
+      aria-haspopup={hasChildren}
+      tabIndex={0}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.1 }}
+    >
+      {content}
     </motion.button>
   );
 }

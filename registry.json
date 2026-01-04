@@ -14,16 +14,6 @@
       ]
     },
     {
-      "name": "kbd",
-      "type": "registry:ui",
-      "files": [
-        {
-          "path": "registry/new-york/ui/kbd.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "nested-drawer",
       "type": "registry:component",
       "title": "Nested Menu Drawer",
