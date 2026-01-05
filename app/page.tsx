@@ -17,19 +17,21 @@ const COMPONENTS = [
 export default function Home() {
   return (
     <div className="max-w-3xl mx-auto flex flex-col min-h-svh px-4 py-8 gap-8 relative">
-      <div className="absolute top-8 right-4">
-        <ThemeToggle />
-      </div>
-      <header className="flex flex-col gap-1">
-        <h1 className="text-lg font-semibold tracking-tight">
-          Milind&apos;s UI Components
-        </h1>
-        <p className="text-muted-foreground">
-          {/* Thoughtfully designed, crafted with attention to detail, and built to
+      <div id="milind-ui-header">
+        <div className="absolute top-8 right-4">
+          <ThemeToggle />
+        </div>
+        <header className="flex flex-col gap-1">
+          <h1 className="text-lg font-semibold tracking-tight">
+            Milind&apos;s UI Components
+          </h1>
+          <p className="text-muted-foreground">
+            {/* Thoughtfully designed, crafted with attention to detail, and built to
           be yours. */}
-          Attention (to detail) is all you need!
-        </p>
-      </header>
+            Attention (to detail) is all you need!
+          </p>
+        </header>
+      </div>
       <main className="flex flex-col flex-1 gap-8">
         {COMPONENTS.map(
           ({ name, description, component: Component, minHeight }) => (
