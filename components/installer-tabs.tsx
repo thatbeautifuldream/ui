@@ -20,6 +20,32 @@ type TComponentFile = {
   type: string;
 };
 
+// Registry path patterns to replace for manual installation
+const REGISTRY_PATH_REPLACEMENTS = [
+  {
+    // Match: @/registry/new-york/blocks/{component}/components/{file}
+    // Replace with: @/components/{file}
+    pattern: /@\/registry\/new-york\/blocks\/[^/]+\/components\/([^"';\s]+)/g,
+    replacement: "@/components/$1",
+  },
+  {
+    // Match: @/registry/new-york/blocks/{component}/{file}
+    // Replace with: @/components/{file}
+    pattern: /@\/registry\/new-york\/blocks\/[^/]+\/([^"';\s]+)/g,
+    replacement: "@/components/$1",
+  },
+];
+
+function normalizeRegistryPaths(content: string): string {
+  let normalizedContent = content;
+
+  REGISTRY_PATH_REPLACEMENTS.forEach(({ pattern, replacement }) => {
+    normalizedContent = normalizedContent.replace(pattern, replacement);
+  });
+
+  return normalizedContent;
+}
+
 export function InstallerTabs({
   componentName,
   className,
@@ -117,6 +143,9 @@ export function InstallerTabs({
                 return "typescript";
               };
 
+              // Normalize registry paths for manual installation
+              const normalizedContent = normalizeRegistryPaths(file.content);
+
               return (
                 <div key={file.path} className="space-y-2">
                   <blockquote className="text-sm font-medium text-foreground bg-fd-muted/50 px-2 py-1 rounded-tl-none rounded-lg w-fit border">
@@ -124,7 +153,7 @@ export function InstallerTabs({
                   </blockquote>
                   <DynamicCodeBlock
                     lang={getLang(fileName)}
-                    code={file.content}
+                    code={normalizedContent}
                   />
                 </div>
               );
