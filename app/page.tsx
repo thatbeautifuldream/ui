@@ -2,9 +2,17 @@ import { InstallerTabs } from "@/components/installer-tabs";
 import { OpenInV0Button } from "@/components/open-in-v0-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
+import { AnimatedAvatarStackExample } from "@/registry/new-york/blocks/animated-avatar-stack/animated-avatar-stack-example";
 import { NestedDrawerExample } from "@/registry/new-york/blocks/nested-drawer/nested-drawer-example";
 
 const COMPONENTS = [
+  {
+    name: "animated-avatar-stack",
+    description:
+      "An animated avatar stack with size variants and customizable visibility.",
+    component: AnimatedAvatarStackExample,
+    minHeight: "min-h-[400px]",
+  },
   {
     name: "nested-drawer",
     description:
@@ -32,7 +40,7 @@ export default function Home() {
           </p>
         </header>
       </div>
-      <main className="flex flex-col flex-1 gap-8">
+      <main className="flex flex-col gap-8">
         {COMPONENTS.map(
           ({ name, description, component: Component, minHeight }) => (
             <div key={name}>
