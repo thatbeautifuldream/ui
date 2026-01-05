@@ -1,5 +1,6 @@
 import { InstallerTabs } from "@/components/installer-tabs";
 import { OpenInV0Button } from "@/components/open-in-v0-button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 import { NestedDrawerExample } from "@/registry/new-york/blocks/nested-drawer/nested-drawer-example";
 
@@ -16,16 +17,17 @@ const COMPONENTS = [
 export default function Home() {
   return (
     <div className="max-w-3xl mx-auto flex flex-col min-h-svh px-4 py-8 gap-8 relative">
-      {/* <div className="absolute top-8 right-4">
-            <ThemeToggle />
-          </div> */}
+      <div className="absolute top-8 right-4">
+        <ThemeToggle />
+      </div>
       <header className="flex flex-col gap-1">
-        <h1 className="text-3xl font-semibold tracking-tight">
+        <h1 className="text-lg font-semibold tracking-tight">
           Milind&apos;s UI Components
         </h1>
         <p className="text-muted-foreground">
-          Milind&apos;s take on UI components. Thoughtfully designed, crafted
-          with attention to detail, and built to be yours.
+          {/* Thoughtfully designed, crafted with attention to detail, and built to
+          be yours. */}
+          Attention (to detail) is all you need!
         </p>
       </header>
       <main className="flex flex-col flex-1 gap-8">
