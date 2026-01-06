@@ -13,8 +13,8 @@ import {
   Users,
 } from "lucide-react";
 
-import type { TMenuItem } from "@/registry/new-york/blocks/nested-drawer/components/nested-drawer";
-import { NestedDrawer } from "@/registry/new-york/blocks/nested-drawer/components/nested-drawer";
+import type { TMenuItem } from "@/registry/blocks/nested-drawer/nested-drawer";
+import { NestedDrawer } from "@/registry/blocks/nested-drawer/nested-drawer";
 
 const MENU_DATA: TMenuItem[] = [
   {

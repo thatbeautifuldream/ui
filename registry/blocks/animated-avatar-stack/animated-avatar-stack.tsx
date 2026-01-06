@@ -5,17 +5,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/registry/new-york/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/registry/new-york/ui/tooltip";
+} from "@/registry/ui/tooltip";
 
 export const MAX_VISIBLE = 5;
 

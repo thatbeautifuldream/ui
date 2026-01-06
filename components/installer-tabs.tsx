@@ -23,15 +23,21 @@ type TComponentFile = {
 // Registry path patterns to replace for manual installation
 const REGISTRY_PATH_REPLACEMENTS = [
   {
-    // Match: @/registry/new-york/blocks/{component}/components/{file}
-    // Replace with: @/components/{file}
-    pattern: /@\/registry\/new-york\/blocks\/[^/]+\/components\/([^"';\s]+)/g,
-    replacement: "@/components/$1",
+    // Match: @/registry/ui/{component}
+    // Replace with: @/components/ui/{component}
+    pattern: /@\/registry\/ui\/([^"';\s]+)/g,
+    replacement: "@/components/ui/$1",
   },
   {
-    // Match: @/registry/new-york/blocks/{component}/{file}
+    // Match: @/registry/blocks/{component}/components/{file}
+    // Replace with: @/components/ui/{file}
+    pattern: /@\/registry\/blocks\/[^/]+\/components\/([^"';\s]+)/g,
+    replacement: "@/components/ui/$1",
+  },
+  {
+    // Match: @/registry/blocks/{component}/{file}
     // Replace with: @/components/{file}
-    pattern: /@\/registry\/new-york\/blocks\/[^/]+\/([^"';\s]+)/g,
+    pattern: /@\/registry\/blocks\/[^/]+\/([^"';\s]+)/g,
     replacement: "@/components/$1",
   },
 ];

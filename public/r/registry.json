@@ -8,7 +8,7 @@
       "type": "registry:ui",
       "files": [
         {
-          "path": "registry/new-york/ui/button.tsx",
+          "path": "registry/ui/button.tsx",
           "type": "registry:ui"
         }
       ]
@@ -19,7 +19,7 @@
       "dependencies": ["@radix-ui/react-avatar"],
       "files": [
         {
-          "path": "registry/new-york/ui/avatar.tsx",
+          "path": "registry/ui/avatar.tsx",
           "type": "registry:ui"
         }
       ]
@@ -30,7 +30,7 @@
       "dependencies": ["@radix-ui/react-tooltip"],
       "files": [
         {
-          "path": "registry/new-york/ui/tooltip.tsx",
+          "path": "registry/ui/tooltip.tsx",
           "type": "registry:ui"
         }
       ]
@@ -43,11 +43,11 @@
       "dependencies": ["motion"],
       "files": [
         {
-          "path": "registry/new-york/blocks/nested-drawer/nested-drawer-example.tsx",
+          "path": "registry/blocks/nested-drawer/nested-drawer-example.tsx",
           "type": "registry:component"
         },
         {
-          "path": "registry/new-york/blocks/nested-drawer/components/nested-drawer.tsx",
+          "path": "registry/blocks/nested-drawer/nested-drawer.tsx",
           "type": "registry:component"
         }
       ]
@@ -61,11 +61,11 @@
       "registryDependencies": ["avatar", "tooltip"],
       "files": [
         {
-          "path": "registry/new-york/blocks/animated-avatar-stack/animated-avatar-stack-example.tsx",
+          "path": "registry/blocks/animated-avatar-stack/animated-avatar-stack-example.tsx",
           "type": "registry:component"
         },
         {
-          "path": "registry/new-york/blocks/animated-avatar-stack/components/animated-avatar-stack.tsx",
+          "path": "registry/blocks/animated-avatar-stack/animated-avatar-stack.tsx",
           "type": "registry:component"
         }
       ]

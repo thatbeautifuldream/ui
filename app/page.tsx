@@ -2,8 +2,8 @@ import { InstallerTabs } from "@/components/installer-tabs";
 import { OpenInV0Button } from "@/components/open-in-v0-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
-import { AnimatedAvatarStackExample } from "@/registry/new-york/blocks/animated-avatar-stack/animated-avatar-stack-example";
-import { NestedDrawerExample } from "@/registry/new-york/blocks/nested-drawer/nested-drawer-example";
+import { AnimatedAvatarStackExample } from "@/registry/blocks/animated-avatar-stack/animated-avatar-stack-example";
+import { NestedDrawerExample } from "@/registry/blocks/nested-drawer/nested-drawer-example";
 
 const COMPONENTS = [
   {

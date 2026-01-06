@@ -1,8 +1,8 @@
 import {
   AnimatedAvatarStack,
   AVATAR_DATA,
-} from "@/registry/new-york/blocks/animated-avatar-stack/components/animated-avatar-stack";
-import { TooltipProvider } from "@/registry/new-york/ui/tooltip";
+} from "@/registry/blocks/animated-avatar-stack/animated-avatar-stack";
+import { TooltipProvider } from "@/registry/ui/tooltip";
 
 export function AnimatedAvatarStackExample() {
   return (
