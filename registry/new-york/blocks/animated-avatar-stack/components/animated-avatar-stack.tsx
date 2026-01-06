@@ -13,6 +13,7 @@ import {
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger,
 } from "@/registry/new-york/ui/tooltip";
 
@@ -144,36 +145,38 @@ function AnimatedAvatarStack({
   return (
     <div className={cn(avatarStackVariants({ size }), className)} {...props}>
       {visibleAvatars.map((avatar, index) => (
-        <Tooltip key={`${avatar.fallback}-${index}`}>
-          <TooltipTrigger asChild>
-            <motion.div
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              className={cn(avatarVariants({ size }))}
-              initial={{ scale: 0, opacity: 0, y: 20 }}
-              style={{
-                zIndex: visibleAvatars.length - index,
-              }}
-              whileHover={{
-                scale: 1.1,
-                y: -8,
-                zIndex: 100,
-                transition: {
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 25,
-                },
-              }}
-            >
-              <Avatar className="size-full shadow-sm">
-                <AvatarImage src={avatar.src} />
-                <AvatarFallback>{avatar.fallback}</AvatarFallback>
-              </Avatar>
-            </motion.div>
-          </TooltipTrigger>
-          <TooltipContent className="z-50" side="top">
-            {avatar.name}
-          </TooltipContent>
-        </Tooltip>
+        <TooltipProvider key={`${avatar.fallback}-${index}`}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <motion.div
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                className={cn(avatarVariants({ size }))}
+                initial={{ scale: 0, opacity: 0, y: 20 }}
+                style={{
+                  zIndex: visibleAvatars.length - index,
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  y: -8,
+                  zIndex: 100,
+                  transition: {
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25,
+                  },
+                }}
+              >
+                <Avatar className="size-full shadow-sm">
+                  <AvatarImage src={avatar.src} />
+                  <AvatarFallback>{avatar.fallback}</AvatarFallback>
+                </Avatar>
+              </motion.div>
+            </TooltipTrigger>
+            <TooltipContent className="z-50" side="top">
+              {avatar.name}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       ))}
 
       {hiddenCount > 0 && (
