@@ -9,60 +9,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/registry/ui/tooltip";
-
-export const MAX_VISIBLE = 5;
 
 export type AvatarData = {
   src: string;
   fallback: string;
   name: string;
 };
-
-export const AVATAR_DATA: AvatarData[] = [
-  {
-    src: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-    fallback: "RS",
-    name: "Rick Sanchez",
-  },
-  {
-    src: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-    fallback: "MS",
-    name: "Morty Smith",
-  },
-  {
-    src: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
-    fallback: "SS",
-    name: "Summer Smith",
-  },
-  {
-    src: "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
-    fallback: "BS",
-    name: "Beth Smith",
-  },
-  {
-    src: "https://rickandmortyapi.com/api/character/avatar/5.jpeg",
-    fallback: "JS",
-    name: "Jerry Smith",
-  },
-  {
-    src: "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
-    fallback: "ACP",
-    name: "Abadango Cluster Princess",
-  },
-  {
-    src: "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
-    fallback: "AL",
-    name: "Abradolf Lincler",
-  },
-  {
-    src: "https://rickandmortyapi.com/api/character/avatar/8.jpeg",
-    fallback: "AR",
-    name: "Adjudicator Rick",
-  },
-];
 
 const avatarStackVariants = cva("isolate flex items-center", {
   variants: {
@@ -124,13 +78,13 @@ const countBadgeVariants = cva(
 export interface AnimatedAvatarStackProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof avatarStackVariants> {
-  avatarData?: AvatarData[];
+  avatarData: AvatarData[];
   maxVisible?: number;
 }
 
 function AnimatedAvatarStack({
-  avatarData = AVATAR_DATA,
-  maxVisible = MAX_VISIBLE,
+  avatarData,
+  maxVisible = 5,
   size = "md",
   className,
   ...props
@@ -139,8 +93,7 @@ function AnimatedAvatarStack({
   const hiddenCount = avatarData.length - visibleAvatars.length;
 
   return (
-    <TooltipProvider>
-      <div className={cn(avatarStackVariants({ size }), className)} {...props}>
+    <div className={cn(avatarStackVariants({ size }), className)} {...props}>
         {visibleAvatars.map((avatar, index) => (
           <Tooltip key={`${avatar.fallback}-${index}`}>
             <TooltipTrigger asChild>
@@ -203,8 +156,7 @@ function AnimatedAvatarStack({
             </TooltipContent>
           </Tooltip>
         )}
-      </div>
-    </TooltipProvider>
+    </div>
   );
 }
 
