@@ -7,17 +7,17 @@ import { NestedDrawerExample } from "@/registry/blocks/nested-drawer/nested-draw
 
 const COMPONENTS = [
   {
-    name: "animated-avatar-stack",
-    description:
-      "An animated avatar stack with size variants and customizable visibility.",
-    component: AnimatedAvatarStackExample,
-    minHeight: "min-h-[400px]",
-  },
-  {
     name: "nested-drawer",
     description:
       "A fully accessible, animated drawer component with nested navigation.",
     component: NestedDrawerExample,
+    minHeight: "min-h-[400px]",
+  },
+  {
+    name: "animated-avatar-stack",
+    description:
+      "An animated avatar stack with size variants and customizable visibility.",
+    component: AnimatedAvatarStackExample,
     minHeight: "min-h-[400px]",
   },
 ] as const;
