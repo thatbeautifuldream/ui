@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { geistMono, geistSans } from "@/lib/fonts";
+import { ClarityInit } from "@/components/clarity-init";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -84,6 +85,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <ClarityInit />
       </body>
     </html>
   );
