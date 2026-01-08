@@ -1,23 +1,37 @@
-# registry-template
+# attn/ui
 
-You can use the `shadcn` CLI to run your own component registry. Running your own
-component registry allows you to distribute your custom components, hooks, pages, and
-other files to any React project.
+A small, curated collection of accessible, animated UI components.
 
-> [!IMPORTANT]  
-> This template uses Tailwind v4. For Tailwind v3, see [registry-template-v3](https://github.com/shadcn-ui/registry-template-v3).
+Built on the shadcn distribution model: you copy the code, you own it. No package to install, no styles to override, no framework lock-in.
+
+This isn't a design system. It's a public expression of UI craft—what gets included has passed a quality bar for accessibility, motion, and interaction design. Attention to detail is all you need.
 
 ## Getting Started
 
-This is a template for creating a custom registry using Next.js.
+Visit [ui.milind.app](https://ui.milind.app) to browse components and copy the code.
 
-- The template uses a `registry.json` file to define components and their files.
-- The `shadcn build` command is used to build the registry.
-- The registry items are served as static files under `public/r/[name].json`.
-- The template also includes a route handler for serving registry items.
-- Every registry item are compatible with the `shadcn` CLI.
-- We have also added v0 integration using the `Open in v0` api.
+Components are distributed as code, compatible with the `shadcn` CLI:
 
-## Documentation
+```bash
+npx shadcn@latest add https://ui.milind.app/r/nested-drawer.json
+```
 
-Visit the [shadcn documentation](https://ui.shadcn.com/docs/registry) to view the full documentation.
+## Philosophy
+
+Most component libraries optimize for breadth. This one optimizes for depth.
+
+Every component here has been built with attention to accessible markup, smooth motion, and interaction nuance. Components are included only when they meet a quality standard: no half-working animations, no keyboard traps, no motion without purpose.
+
+## Component Acceptance Checklist
+
+- Keyboard navigation and focus management work correctly
+- ARIA patterns are implemented according to WAI-ARIA Authoring Practices
+- Animations are smooth, purposeful, and respect `prefers-reduced-motion`
+- Component can be interrupted mid-animation without visual or state bugs
+- Implementation is composition-friendly and doesn't force a single use case
+- Code is readable and doesn't obscure intent with premature abstraction
+- Component solves a real interaction problem, not just aesthetic novelty
+
+---
+
+Made by Milind Mishra

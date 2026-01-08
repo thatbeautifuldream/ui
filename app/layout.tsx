@@ -6,47 +6,48 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Milind's UI Components",
-    template: "%s | Milind's UI Components",
+    default: "attn/ui",
+    template: "%s | attn/ui",
   },
   description:
-    "Milind's take on UI components. Thoughtfully designed, crafted with attention to detail, and built to be yours.",
+    "Attention (to detail) is all you need. Accessible, animated components built with craft. Built on shadcn, distributed as code.",
   keywords: [
     "UI components",
     "React components",
+    "accessible components",
+    "animated components",
     "Next.js",
     "shadcn/ui",
-    "open source",
-    "component library",
-    "custom components",
     "TypeScript",
     "Tailwind CSS",
+    "attention to detail",
+    "UI craft",
   ],
-  authors: [{ name: "Milind" }],
-  creator: "Milind",
+  authors: [{ name: "Milind Mishra" }],
+  creator: "Milind Mishra",
   metadataBase: new URL("https://ui.milind.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "/",
-    title: "Milind's UI Components",
+    title: "attn/ui by Milind Mishra",
     description:
-      "Milind's take on UI components. Thoughtfully designed, crafted with attention to detail, and built to be yours.",
-    siteName: "Milind's UI Components",
+      "Attention (to detail) is all you need. Accessible, animated components built with craft. Built on shadcn, distributed as code.",
+    siteName: "attn/ui",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Milind's UI Components",
+        alt: "Attention (to detail) is all you need.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Milind's UI Components",
+    title: "attn/ui by Milind Mishra",
     description:
-      "Milind's take on UI components. Thoughtfully designed, crafted with attention to detail, and built to be yours.",
+      "Attention (to detail) is all you need. Accessible, animated components built with craft. Built on shadcn, distributed as code.",
     images: ["/og-image.png"],
     creator: "@milindmishra_",
   },
