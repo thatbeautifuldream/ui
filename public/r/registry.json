@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "attn-ui",
-  "homepage": "https://ui.milind.app",
+  "homepage": "https://attnui.com",
   "items": [
     {
       "name": "button",
