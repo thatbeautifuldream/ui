@@ -1,0 +1,146 @@
+---
+title: Nested Drawer
+description: A fully accessible, animated drawer component with nested navigation support and smooth transitions
+---
+
+# Nested Drawer
+
+A fully accessible drawer component with support for nested navigation menus. Features smooth animations, keyboard navigation, and focus management.
+
+## Features
+
+- ✅ **Accessible**: Full keyboard navigation and screen reader support
+- ✅ **Nested Navigation**: Support for multi-level menu hierarchies
+- ✅ **Smooth Animations**: Fluid transitions with respect for reduced motion preferences
+- ✅ **Focus Management**: Proper focus handling when opening/closing
+- ✅ **Composable**: Use compound components for flexible layouts
+- ✅ **Mobile-First**: Optimized for touch interactions
+
+## Installation
+
+<Tabs items={['pnpm', 'npm', 'yarn', 'bun', 'manual']}>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://ui.milind.app/r/nested-drawer.json
+    ```
+  </Tab>
+  <Tab value="npm">
+    ```bash
+    npx shadcn@latest add https://ui.milind.app/r/nested-drawer.json
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn shadcn@latest add https://ui.milind.app/r/nested-drawer.json
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx shadcn@latest add https://ui.milind.app/r/nested-drawer.json
+    ```
+  </Tab>
+  <Tab value="manual">
+    Copy and paste the code from the [GitHub repository](https://github.com/milindmishra/ui).
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { NestedDrawer } from "@/components/nested-drawer";
+
+const menuData = [
+  {
+    id: "home",
+    title: "Home",
+    description: "Welcome page",
+    icon: HomeIcon,
+    href: "#",
+  },
+  {
+    id: "products",
+    title: "Products",
+    description: "Browse our products",
+    icon: PackageIcon,
+    children: [
+      {
+        id: "software",
+        title: "Software",
+        description: "Software solutions",
+        icon: ServerIcon,
+        href: "#",
+      },
+    ],
+  },
+];
+
+export default function Example() {
+  return (
+    <NestedDrawer initialMenu={menuData}>
+      <NestedDrawer.Trigger>
+        <span>Open Menu</span>
+      </NestedDrawer.Trigger>
+      <NestedDrawer.Content title="Main Menu">
+        <NestedDrawer.Menu />
+      </NestedDrawer.Content>
+    </NestedDrawer>
+  );
+}
+```
+
+## API Reference
+
+### NestedDrawer
+
+Root component that provides context for the drawer.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `initialMenu` | `TMenuItem[]` | Initial menu items to display |
+| `children` | `ReactNode` | Child components (Trigger, Content, etc.) |
+
+### NestedDrawer.Trigger
+
+Button that opens the drawer.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `children` | `ReactNode` | Button content |
+| `className` | `string` | Additional CSS classes |
+
+### NestedDrawer.Content
+
+Container for the drawer content.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `title` | `string` | Accessible title for the drawer |
+| `children` | `ReactNode` | Content to display |
+
+### TMenuItem
+
+Menu item interface:
+
+```tsx
+type TMenuItem = {
+  id: string;
+  title: string;
+  description?: string;
+  icon?: LucideIcon;
+  children?: TMenuItem[];
+  href?: string;
+};
+```
+
+## Accessibility
+
+- **Keyboard Navigation**: Full keyboard support with Tab, Enter, Space, and Escape keys
+- **Focus Management**: Automatic focus on first interactive element when opened
+- **Screen Readers**: Proper ARIA labels and roles
+- **Reduced Motion**: Respects `prefers-reduced-motion` user preference
+
+## Dependencies
+
+- `motion` - For smooth animations
+- `lucide-react` - For icons (optional)
+- `next/link` - For navigation (can be replaced)
