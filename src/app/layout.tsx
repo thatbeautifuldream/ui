@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { RootProvider } from 'fumadocs-ui/provider/next';
+import { RootProvider } from "fumadocs-ui/provider/next";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { geistMono, geistSans } from "@/lib/fonts";
 import { ClarityInit } from "@/components/clarity-init";
-import './global.css';
+import "./global.css";
 
 export const metadata: Metadata = {
   title: {
@@ -70,9 +70,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Layout({ children }: LayoutProps<'/'>) {
+export default function Layout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
       <body className={`antialiased font-sans flex flex-col min-h-screen`}>
         <ThemeProvider
           attribute="class"
