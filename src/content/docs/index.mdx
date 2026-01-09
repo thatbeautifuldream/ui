@@ -1,47 +1,114 @@
 ---
-title: Welcome to attn/ui
-description: Accessible, animated UI components built with attention to detail
+title: Philosophy
+description: attn/ui - Attention (to detail) is all you need
 ---
 
 # attn/ui
 
-A small, curated collection of accessible, animated UI components.
+attn/ui is a small, curated collection of UI components.
+It exists to explore how careful decisions shape better interfaces.
 
-Built on the shadcn distribution model: you copy the code, you own it. No package to install, no styles to override, no framework lock-in.
+This is not a catalog.
+It is a body of work.
 
-This isn't a design system. It's a public expression of UI craft—what gets included has passed a quality bar for accessibility, motion, and interaction design. **Attention to detail is all you need.**
+## Why this exists
 
-## Philosophy
+Most UI libraries optimize for coverage.
+attn/ui optimizes for intention.
 
-Most component libraries optimize for breadth. This one optimizes for depth.
+Components are added only when there is something worth saying — a clearer API, a better interaction, or a more thoughtful default.
 
-Every component here has been built with attention to accessible markup, smooth motion, and interaction nuance. Components are included only when they meet a quality standard: no half-working animations, no keyboard traps, no motion without purpose.
+If a component does not express a point of view, it does not belong here.
 
-## Getting Started
+## Taste over completeness
 
-Components are distributed as code, compatible with the `shadcn` CLI:
+attn/ui does not aim to solve every UI problem.
 
-```bash
-npx shadcn@latest add https://ui.milind.app/r/nested-drawer.json
-```
+There will be fewer components than expected.
+Some common primitives may never appear.
 
-You can also copy the code manually from the documentation pages.
+Absence is intentional.
+Restraint is part of the craft.
 
-## Component Acceptance Checklist
+## Authored, not assembled
 
-Every component in this collection meets these criteria:
+Every component in attn/ui is treated as authored work.
 
-- ✅ Keyboard navigation and focus management work correctly
-- ✅ ARIA patterns are implemented according to WAI-ARIA Authoring Practices
-- ✅ Animations are smooth, purposeful, and respect `prefers-reduced-motion`
-- ✅ Component can be interrupted mid-animation without visual or state bugs
-- ✅ Implementation is composition-friendly and doesn't force a single use case
-- ✅ Code is readable and doesn't obscure intent with premature abstraction
-- ✅ Component solves a real interaction problem, not just aesthetic novelty
+Patterns may be familiar, but implementations are reconsidered.
+APIs are shaped deliberately.
+Motion is tuned, not added by default.
 
-## Browse Components
+A component is only shipped when it feels inevitable — not just functional.
 
-<Cards>
-  <Card title="Nested Drawer" href="/docs/components/nested-drawer" description="A fully accessible drawer with nested navigation support" />
-  <Card title="Animated Avatar Stack" href="/docs/components/animated-avatar-stack" description="An animated avatar stack with size variants" />
-</Cards>
+## Motion as communication
+
+Animation exists to explain change.
+
+Motion in attn/ui:
+- Clarifies state transitions
+- Guides attention
+- Reduces cognitive load
+
+If motion can be removed without losing meaning, it does not belong.
+
+## Accessibility is the baseline
+
+Accessibility is not a feature here.
+
+Components are:
+- Keyboard-first
+- Focus-aware
+- Predictable in behavior
+- Designed to degrade gracefully
+
+If a component is not accessible, it is unfinished.
+
+## APIs should disappear
+
+Good APIs do not draw attention to themselves.
+
+attn/ui favors:
+- Small, obvious surfaces
+- Opinionated defaults
+- Customization without ceremony
+
+If using a component requires reading the documentation twice, the API failed.
+
+## Ownership matters
+
+attn/ui follows the shadcn distribution model.
+
+You own the code.
+You can change it.
+You are responsible for it.
+
+This encourages understanding over abstraction and learning over consumption.
+
+## Fewer components, higher standards
+
+attn/ui grows slowly by design.
+
+Shipping cadence is irrelevant.
+Quality is the metric.
+
+A small set of well-considered components is more valuable than a large set of interchangeable ones.
+
+## A living document
+
+attn/ui will evolve as my taste evolves.
+
+Components may be:
+- Refined
+- Rewritten
+- Removed
+
+This is not instability.
+It is honesty.
+
+## An authored collection
+
+attn/ui is a public expression of how I think UI should be built.
+
+Every component is a partial answer.
+
+By Milind Mishra
