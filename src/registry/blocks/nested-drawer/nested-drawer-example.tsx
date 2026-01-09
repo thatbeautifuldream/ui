@@ -13,10 +13,10 @@ import {
   Users,
 } from "lucide-react";
 
-import type { TMenuItem } from "@/registry/blocks/nested-drawer/nested-drawer";
+import type { MenuItem } from "@/registry/blocks/nested-drawer/nested-drawer";
 import { NestedDrawer } from "@/registry/blocks/nested-drawer/nested-drawer";
 
-const MENU_DATA: TMenuItem[] = [
+const MENU_DATA: MenuItem[] = [
   {
     id: "home",
     title: "Home",

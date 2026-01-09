@@ -9,20 +9,20 @@ import { cn } from "@/lib/utils";
 const ANIMATION_DURATION = 0.4;
 const EASING = [0.32, 0.72, 0, 1] as const;
 
-export type TMenuItem = {
+export type MenuItem = {
   id: string;
   title: string;
   description?: string;
   icon?: LucideIcon;
-  children?: TMenuItem[];
+  children?: MenuItem[];
   href?: string;
 };
 
-type TNestedDrawerContext = {
-  menuStack: TMenuItem[][];
-  currentMenu: TMenuItem[];
+type NestedDrawerContext = {
+  menuStack: MenuItem[][];
+  currentMenu: MenuItem[];
   direction: "forward" | "backward";
-  navigateToMenu: (items: TMenuItem[]) => void;
+  navigateToMenu: (items: MenuItem[]) => void;
   navigateBack: () => void;
   canGoBack: boolean;
   open: boolean;
@@ -30,7 +30,7 @@ type TNestedDrawerContext = {
 };
 
 const NestedDrawerContext = React.createContext<
-  TNestedDrawerContext | undefined
+  NestedDrawerContext | undefined
 >(undefined);
 
 const useNestedDrawer = () => {
@@ -45,14 +45,12 @@ const useNestedDrawer = () => {
 
 type TNestedDrawerProps = {
   children: React.ReactNode;
-  initialMenu: TMenuItem[];
+  initialMenu: MenuItem[];
 };
 
 export function NestedDrawer({ children, initialMenu }: TNestedDrawerProps) {
   const [open, setOpen] = React.useState(false);
-  const [menuStack, setMenuStack] = React.useState<TMenuItem[][]>([
-    initialMenu,
-  ]);
+  const [menuStack, setMenuStack] = React.useState<MenuItem[][]>([initialMenu]);
   const [direction, setDirection] = React.useState<"forward" | "backward">(
     "forward"
   );
@@ -60,7 +58,7 @@ export function NestedDrawer({ children, initialMenu }: TNestedDrawerProps) {
   const currentMenu = menuStack[menuStack.length - 1];
   const canGoBack = menuStack.length > 1;
 
-  const navigateToMenu = React.useCallback((items: TMenuItem[]) => {
+  const navigateToMenu = React.useCallback((items: MenuItem[]) => {
     setDirection("forward");
     setMenuStack((prev) => [...prev, items]);
   }, []);
@@ -100,11 +98,11 @@ export function NestedDrawer({ children, initialMenu }: TNestedDrawerProps) {
   );
 }
 
-type TTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type TriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
 };
 
-function Trigger({ children, className, ...props }: TTriggerProps) {
+function Trigger({ children, className, ...props }: TriggerProps) {
   const { setOpen } = useNestedDrawer();
 
   return (
@@ -123,12 +121,12 @@ function Trigger({ children, className, ...props }: TTriggerProps) {
   );
 }
 
-type TContentProps = {
+type ContentProps = {
   title?: string;
   children?: React.ReactNode;
 };
 
-function Content({ title, children }: TContentProps) {
+function Content({ title, children }: ContentProps) {
   const { open, setOpen, canGoBack, navigateBack, currentMenu } =
     useNestedDrawer();
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -299,11 +297,11 @@ function Menu() {
   );
 }
 
-type TMenuItemProps = {
-  item: TMenuItem;
+type MenuItemProps = {
+  item: MenuItem;
 };
 
-function MenuItem({ item }: TMenuItemProps) {
+function MenuItem({ item }: MenuItemProps) {
   const { navigateToMenu, setOpen } = useNestedDrawer();
   const hasChildren = item.children && item.children.length > 0;
 

@@ -9,12 +9,12 @@ A fully accessible drawer component with support for nested navigation menus. Fe
 
 ## Features
 
-- ✅ **Accessible**: Full keyboard navigation and screen reader support
-- ✅ **Nested Navigation**: Support for multi-level menu hierarchies
-- ✅ **Smooth Animations**: Fluid transitions with respect for reduced motion preferences
-- ✅ **Focus Management**: Proper focus handling when opening/closing
-- ✅ **Composable**: Use compound components for flexible layouts
-- ✅ **Mobile-First**: Optimized for touch interactions
+- **Accessible**: Full keyboard navigation and screen reader support
+- **Nested Navigation**: Support for multi-level menu hierarchies
+- **Smooth Animations**: Fluid transitions with respect for reduced motion preferences
+- **Focus Management**: Proper focus handling when opening/closing
+- **Composable**: Use compound components for flexible layouts
+- **Mobile-First**: Optimized for touch interactions
 
 ## Installation
 
@@ -117,17 +117,17 @@ Container for the drawer content.
 | `title` | `string` | Accessible title for the drawer |
 | `children` | `ReactNode` | Content to display |
 
-### TMenuItem
+### MenuItem
 
-Menu item interface:
+Menu item type:
 
 ```tsx
-type TMenuItem = {
+type MenuItem = {
   id: string;
   title: string;
   description?: string;
   icon?: LucideIcon;
-  children?: TMenuItem[];
+  children?: MenuItem[];
   href?: string;
 };
 ```
