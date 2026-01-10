@@ -7,7 +7,7 @@ import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 import {
   PACKAGE_MANAGERS,
   generateInstallerCommand,
-} from "../lib/installer-utils";
+} from "@/lib/installer-utils";
 
 type TInstallerTabsProps = {
   componentName: string;

@@ -1,0 +1,151 @@
+---
+title: Animated Avatar Stack
+description: An animated avatar stack component with size variants, customizable avatar data, and configurable max visible avatars
+---
+
+# Animated Avatar Stack
+
+An animated stack of user avatars that displays multiple users in an overlapping layout. Perfect for showing collaborators, team members, or participants.
+
+## Features
+
+- **Multiple Sizes**: 7 size variants from xs to 3xl
+- **Smooth Animations**: Stagger animations on hover with Motion
+- **Overflow Handling**: Shows "+N" indicator for additional users
+- **Customizable**: Configure max visible avatars
+- **Tooltips**: Built-in tooltip support for user info
+- **Accessible**: Proper ARIA labels and keyboard navigation
+
+## Installation
+
+<Tabs items={['pnpm', 'npm', 'yarn', 'bun', 'manual']}>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://attnui.com/r/animated-avatar-stack.json
+    ```
+  </Tab>
+  <Tab value="npm">
+    ```bash
+    npx shadcn@latest add https://attnui.com/r/animated-avatar-stack.json
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn shadcn@latest add https://attnui.com/r/animated-avatar-stack.json
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx shadcn@latest add https://attnui.com/r/animated-avatar-stack.json
+    ```
+  </Tab>
+  <Tab value="manual">
+    Copy and paste the code from the [GitHub repository](https://github.com/thatbeautifuldream/ui).
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { AnimatedAvatarStack } from "@/components/animated-avatar-stack";
+
+const users = [
+  {
+    name: "John Doe",
+    image: "https://avatar.vercel.sh/john",
+  },
+  {
+    name: "Jane Smith",
+    image: "https://avatar.vercel.sh/jane",
+  },
+  {
+    name: "Bob Johnson",
+    image: "https://avatar.vercel.sh/bob",
+  },
+];
+
+export default function Example() {
+  return (
+    <AnimatedAvatarStack
+      avatars={users}
+      size="md"
+      maxVisible={3}
+    />
+  );
+}
+```
+
+## API Reference
+
+### AnimatedAvatarStack
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `avatars` | `Avatar[]` | required | Array of avatar objects |
+| `size` | `AvatarSize` | `"md"` | Size variant |
+| `maxVisible` | `number` | `3` | Maximum visible avatars |
+| `className` | `string` | - | Additional CSS classes |
+
+### Avatar Type
+
+```tsx
+type Avatar = {
+  name: string;
+  image?: string;
+  fallback?: string;
+};
+```
+
+### Size Variants
+
+Available sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
+
+| Size | Dimensions |
+|------|------------|
+| `xs` | 24px |
+| `sm` | 32px |
+| `md` | 40px (default) |
+| `lg` | 48px |
+| `xl` | 56px |
+| `2xl` | 64px |
+| `3xl` | 80px |
+
+## Examples
+
+### Different Sizes
+
+```tsx
+<AnimatedAvatarStack avatars={users} size="xs" />
+<AnimatedAvatarStack avatars={users} size="sm" />
+<AnimatedAvatarStack avatars={users} size="md" />
+<AnimatedAvatarStack avatars={users} size="lg" />
+<AnimatedAvatarStack avatars={users} size="xl" />
+```
+
+### Custom Max Visible
+
+```tsx
+<AnimatedAvatarStack avatars={users} maxVisible={5} />
+```
+
+### With Overflow
+
+```tsx
+// If you have 10 users but maxVisible is 3,
+// it will show 3 avatars + a "+7" indicator
+<AnimatedAvatarStack avatars={tenUsers} maxVisible={3} />
+```
+
+## Accessibility
+
+- **Keyboard Navigation**: Fully keyboard accessible
+- **Tooltips**: Hover to see full user name
+- **ARIA Labels**: Proper labels for screen readers
+- **Reduced Motion**: Respects user motion preferences
+
+## Dependencies
+
+- `@radix-ui/react-avatar` - Avatar primitive
+- `@radix-ui/react-tooltip` - Tooltip component
+- `motion` - For animations
+- `class-variance-authority` - For size variants

@@ -1,37 +1,45 @@
-# attn/ui
+# ui
 
-A small, curated collection of accessible, animated UI components.
+This is a Next.js application generated with
+[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
 
-Built on the shadcn distribution model: you copy the code, you own it. No package to install, no styles to override, no framework lock-in.
-
-This isn't a design system. It's a public expression of UI craft—what gets included has passed a quality bar for accessibility, motion, and interaction design. Attention to detail is all you need.
-
-## Getting Started
-
-Visit [ui.milind.app](https://ui.milind.app) to browse components and copy the code.
-
-Components are distributed as code, compatible with the `shadcn` CLI:
+Run development server:
 
 ```bash
-npx shadcn@latest add https://ui.milind.app/r/nested-drawer.json
+npm run dev
+# or
+pnpm dev
+# or
+yarn dev
 ```
 
-## Philosophy
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Most component libraries optimize for breadth. This one optimizes for depth.
+## Explore
 
-Every component here has been built with attention to accessible markup, smooth motion, and interaction nuance. Components are included only when they meet a quality standard: no half-working animations, no keyboard traps, no motion without purpose.
+In the project, you can see:
 
-## Component Acceptance Checklist
+- `src/lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
+- `src/lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
 
-- Keyboard navigation and focus management work correctly
-- ARIA patterns are implemented according to WAI-ARIA Authoring Practices
-- Animations are smooth, purposeful, and respect `prefers-reduced-motion`
-- Component can be interrupted mid-animation without visual or state bugs
-- Implementation is composition-friendly and doesn't force a single use case
-- Code is readable and doesn't obscure intent with premature abstraction
-- Component solves a real interaction problem, not just aesthetic novelty
+| Route                         | Description                                            |
+| ----------------------------- | ------------------------------------------------------ |
+| `src/app/(home)`              | The route group for your landing page and other pages. |
+| `src/app/docs`                | The documentation layout and pages.                    |
+| `src/app/api/search/route.ts` | The Route Handler for search.                          |
 
----
+### Fumadocs MDX
 
-Made by Milind Mishra
+A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+
+Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+
+## Learn More
+
+To learn more about Next.js and Fumadocs, take a look at the following
+resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
+  features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
