@@ -1,4 +1,5 @@
-import type { Metadata, LayoutProps } from "next";
+import type { Metadata } from "next";
+import type LayoutProps from "next";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { geistMono, geistSans } from "@/lib/fonts";
