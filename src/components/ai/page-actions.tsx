@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   Check,
   ChevronDown,
@@ -81,11 +81,16 @@ export function ViewOptions({
    */
   githubUrl: string;
 }) {
+  const [fullMarkdownUrl, setFullMarkdownUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setFullMarkdownUrl(new URL(markdownUrl, window.location.origin).toString());
+    }
+  }, [markdownUrl]);
+
   const items = useMemo(() => {
-    const fullMarkdownUrl =
-      typeof window !== "undefined"
-        ? new URL(markdownUrl, window.location.origin)
-        : "loading";
+    if (!fullMarkdownUrl) return [];
     const q = `Read ${fullMarkdownUrl}, I want to ask questions about it.`;
 
     return [
@@ -206,7 +211,7 @@ export function ViewOptions({
         icon: <MessageCircleIcon />,
       },
     ];
-  }, [githubUrl, markdownUrl]);
+  }, [fullMarkdownUrl, githubUrl]);
 
   return (
     <Popover>

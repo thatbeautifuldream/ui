@@ -10,7 +10,7 @@ export function baseOptions(): BaseLayoutProps {
       {
         text: "Components",
         url: "/",
-        active: "nested-url",
+        active: "url",
       },
       {
         text: "Documentation",

@@ -13,7 +13,8 @@ import { LLMCopyButton, ViewOptions } from "@/components/ai/page-actions";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const slug = params.slug ?? [];
+  const page = source.getPage(slug);
   if (!page) notFound();
 
   const MDX = page.data.body;
@@ -30,9 +31,9 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
         {page.data.description}
       </DocsDescription>
       <div className="flex flex-row gap-2 items-center border-b pb-6">
-        <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
+        <LLMCopyButton markdownUrl={`/llms.mdx${page.url}`} />
         <ViewOptions
-          markdownUrl={`${page.url}.mdx`}
+          markdownUrl={`/llms.mdx${page.url}`}
           // update it to match your repo
           githubUrl={`https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/src/content/docs/${page.path}`}
         />
@@ -57,7 +58,8 @@ export async function generateMetadata(
   props: PageProps<"/docs/[[...slug]]">
 ): Promise<Metadata> {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const slug = params.slug ?? [];
+  const page = source.getPage(slug);
   if (!page) notFound();
 
   return {
