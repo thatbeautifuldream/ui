@@ -4,6 +4,7 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { geistMono, geistSans } from "@/lib/fonts";
 import { ClarityInit } from "@/components/clarity-init";
+
 import "./global.css";
 
 export const metadata: Metadata = {
@@ -27,12 +28,12 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Milind Mishra" }],
   creator: "Milind Mishra",
-  metadataBase: new URL("https://ui.milind.app"),
+  metadataBase: new URL("https://attnui.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "/",
-    title: "attn/ui by Milind Mishra",
+    title: "attn/ui - attention (to detail) is all you need",
     description:
       "Attention (to detail) is all you need. Accessible, animated components built with craft. Built on shadcn, distributed as code.",
     siteName: "attn/ui",
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "attn/ui by Milind Mishra",
+    title: "attn/ui - attention (to detail) is all you need",
     description:
       "Attention (to detail) is all you need. Accessible, animated components built with craft. Built on shadcn, distributed as code.",
     images: ["/og-image.png"],
