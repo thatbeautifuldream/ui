@@ -120,5 +120,8 @@
   }
   body {
     @apply bg-background dark:bg-black text-foreground font-sans;
+    ::selection {
+      @apply bg-foreground text-background;
+    }
   }
 }

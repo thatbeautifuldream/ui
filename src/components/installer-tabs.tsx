@@ -1,176 +1,77 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Copy, Check } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
-import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import { Check, Copy } from "lucide-react";
+import { useState } from "react";
 import {
-  PACKAGE_MANAGERS,
   generateInstallerCommand,
+  PACKAGE_MANAGERS,
+  type TPackageManager,
 } from "@/lib/installer-utils";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 
 type TInstallerTabsProps = {
   componentName: string;
   className?: string;
 };
 
-type TComponentFile = {
-  path: string;
-  content: string;
-  type: string;
-};
-
-// Registry path patterns to replace for manual installation
-const REGISTRY_PATH_REPLACEMENTS = [
-  {
-    // Match: @/registry/ui/{component}
-    // Replace with: @/components/ui/{component}
-    pattern: /@\/registry\/ui\/([^"';\s]+)/g,
-    replacement: "@/components/ui/$1",
-  },
-  {
-    // Match: @/registry/blocks/{component}/components/{file}
-    // Replace with: @/components/ui/{file}
-    pattern: /@\/registry\/blocks\/[^/]+\/components\/([^"';\s]+)/g,
-    replacement: "@/components/ui/$1",
-  },
-  {
-    // Match: @/registry/blocks/{component}/{file}
-    // Replace with: @/components/{file}
-    pattern: /@\/registry\/blocks\/[^/]+\/([^"';\s]+)/g,
-    replacement: "@/components/$1",
-  },
-];
-
-function normalizeRegistryPaths(content: string): string {
-  let normalizedContent = content;
-
-  REGISTRY_PATH_REPLACEMENTS.forEach(({ pattern, replacement }) => {
-    normalizedContent = normalizedContent.replace(pattern, replacement);
-  });
-
-  return normalizedContent;
-}
-
 export function InstallerTabs({
   componentName,
   className,
 }: TInstallerTabsProps) {
-  const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
-  const [componentFiles, setComponentFiles] = useState<TComponentFile[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<TPackageManager["name"]>(
+    PACKAGE_MANAGERS[0].name,
+  );
+  const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    async function fetchComponentData() {
-      try {
-        const response = await fetch(`/r/${componentName}.json`);
-        const data = await response.json();
-        setComponentFiles(data.files || []);
-      } catch (error) {
-        console.error("Failed to fetch component data:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchComponentData();
-  }, [componentName]);
-
-  const copyToClipboard = async (command: string) => {
+  const copyToClipboard = async () => {
+    const command = generateInstallerCommand(componentName, activeTab);
     try {
       await navigator.clipboard.writeText(command);
-      setCopiedCommand(command);
-      setTimeout(() => setCopiedCommand(null), 2000);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy command:", err);
     }
   };
 
   return (
-    <Tabs defaultValue={PACKAGE_MANAGERS[0].name} className={className}>
+    <Tabs
+      // @ts-ignore
+      value={activeTab}
+      // @ts-ignore
+      onValueChange={(value) => setActiveTab(value)}
+      className={className}
+    >
       <TabsList>
         {PACKAGE_MANAGERS.map((pm) => (
           <TabsTrigger key={pm.name} value={pm.name}>
             {pm.name}
           </TabsTrigger>
         ))}
-        <TabsTrigger value="manual">manual</TabsTrigger>
+        <button
+          type="button"
+          onClick={copyToClipboard}
+          className="flex items-center justify-center p-1.5 hover:bg-fd-muted/50 rounded transition-colors cursor-pointer ml-auto"
+          title="Copy command"
+        >
+          {copied ? (
+            <Check className="w-3.5 h-3.5" />
+          ) : (
+            <Copy className="w-3.5 h-3.5" />
+          )}
+        </button>
       </TabsList>
 
       {PACKAGE_MANAGERS.map((pm) => {
         const command = generateInstallerCommand(componentName, pm.name);
         return (
           <TabsContent key={pm.name} value={pm.name}>
-            <div className="flex items-center justify-between gap-2 font-mono text-sm">
-              <code className="flex-1">{command}</code>
-              <button
-                type="button"
-                onClick={() => copyToClipboard(command)}
-                className="flex items-center gap-1 px-2 py-1 text-xs hover:bg-fd-muted/50 rounded transition-colors cursor-pointer"
-                title="Copy command"
-              >
-                {copiedCommand === command ? (
-                  <>
-                    <Check className="w-3 h-3" />
-                    Copied
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3 h-3" />
-                    Copy
-                  </>
-                )}
-              </button>
+            <div className="font-mono text-sm overflow-x-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <code className="whitespace-nowrap">{command}</code>
             </div>
           </TabsContent>
         );
       })}
-
-      <TabsContent value="manual">
-        {loading ? (
-          <div className="text-sm text-muted-foreground py-4">
-            Loading component code...
-          </div>
-        ) : componentFiles.length > 0 ? (
-          <div className="space-y-6">
-            <p className="text-sm text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            {componentFiles.map((file) => {
-              const fileName = file.path.split("/").pop() || "component.tsx";
-              // Determine language from file extension
-              const getLang = (filename: string) => {
-                if (filename.endsWith(".tsx") || filename.endsWith(".jsx"))
-                  return "tsx";
-                if (filename.endsWith(".ts")) return "ts";
-                if (filename.endsWith(".js")) return "js";
-                if (filename.endsWith(".css")) return "css";
-                if (filename.endsWith(".json")) return "json";
-                return "typescript";
-              };
-
-              // Normalize registry paths for manual installation
-              const normalizedContent = normalizeRegistryPaths(file.content);
-
-              return (
-                <div key={file.path} className="space-y-2">
-                  <blockquote className="text-sm font-medium text-foreground bg-fd-muted/50 px-2 py-1 rounded-tl-none rounded-lg w-fit border">
-                    {fileName}
-                  </blockquote>
-                  <DynamicCodeBlock
-                    lang={getLang(fileName)}
-                    code={normalizedContent}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="text-sm text-muted-foreground py-4">
-            No component files found.
-          </div>
-        )}
-      </TabsContent>
     </Tabs>
   );
 }

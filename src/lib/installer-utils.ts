@@ -1,5 +1,5 @@
 export type TPackageManager = {
-  name: string;
+  name: "pnpm" | "npm" | "yarn" | "bun";
   command: string;
 };
 
