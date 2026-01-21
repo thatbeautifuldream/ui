@@ -1,4 +1,4 @@
 {
   "title": "Components",
-  "pages": ["nested-drawer", "animated-avatar-stack"]
+  "pages": ["nested-drawer", "animated-avatar-stack", "timezone-clock"]
 }

@@ -1,0 +1,160 @@
+---
+title: Timezone Clock
+description: A real-time clock component that displays time in any timezone with animated transitions and timezone offset indicators
+---
+
+# Timezone Clock
+
+A real-time clock component that displays the current time in any timezone with smooth animated number transitions. Perfect for displaying time across different regions or showing remote team member locations.
+
+## Features
+
+- **Real-Time Updates**: Automatically updates every minute
+- **Animated Transitions**: Smooth number animations using NumberFlow
+- **Timezone Offset**: Shows time difference from user's local timezone
+- **Any Timezone**: Support for all IANA timezone identifiers
+- **Monospace Display**: Clean, tabular number display
+- **Lightweight**: Minimal dependencies with efficient updates
+
+## Installation
+
+<Tabs items={['pnpm', 'npm', 'yarn', 'bun', 'manual']}>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://attnui.com/r/timezone-clock.json
+    ```
+  </Tab>
+  <Tab value="npm">
+    ```bash
+    npx shadcn@latest add https://attnui.com/r/timezone-clock.json
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn shadcn@latest add https://attnui.com/r/timezone-clock.json
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx shadcn@latest add https://attnui.com/r/timezone-clock.json
+    ```
+  </Tab>
+  <Tab value="manual">
+    Copy and paste the code from the [GitHub repository](https://github.com/thatbeautifuldream/ui).
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { TimezoneClock } from "@/components/timezone-clock";
+
+export default function Example() {
+  return <TimezoneClock timezone="America/New_York" />;
+}
+```
+
+## API Reference
+
+### TimezoneClock
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `timezone` | `string` | `"Asia/Kolkata"` | IANA timezone identifier |
+
+### Timezone Format
+
+The `timezone` prop accepts any valid IANA timezone identifier:
+
+- `"America/New_York"` - Eastern Time (US)
+- `"Europe/London"` - British Time
+- `"Asia/Tokyo"` - Japan Standard Time
+- `"Australia/Sydney"` - Australian Eastern Time
+- `"America/Los_Angeles"` - Pacific Time (US)
+- `"Asia/Kolkata"` - India Standard Time
+- And many more...
+
+See the [full list of IANA timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for all available options.
+
+## Examples
+
+### Different Timezones
+
+```tsx
+// New York time
+<TimezoneClock timezone="America/New_York" />
+
+// London time
+<TimezoneClock timezone="Europe/London" />
+
+// Tokyo time
+<TimezoneClock timezone="Asia/Tokyo" />
+
+// Sydney time
+<TimezoneClock timezone="Australia/Sydney" />
+```
+
+### With Labels
+
+```tsx
+<div className="flex flex-col gap-3">
+  <h3 className="font-medium text-sm text-muted-foreground">
+    America/New York
+  </h3>
+  <TimezoneClock timezone="America/New_York" />
+</div>
+```
+
+### Multiple Clocks Grid
+
+```tsx
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div className="flex flex-col gap-3">
+    <h3 className="font-medium text-sm text-muted-foreground">New York</h3>
+    <TimezoneClock timezone="America/New_York" />
+  </div>
+  <div className="flex flex-col gap-3">
+    <h3 className="font-medium text-sm text-muted-foreground">London</h3>
+    <TimezoneClock timezone="Europe/London" />
+  </div>
+  <div className="flex flex-col gap-3">
+    <h3 className="font-medium text-sm text-muted-foreground">Tokyo</h3>
+    <TimezoneClock timezone="Asia/Tokyo" />
+  </div>
+</div>
+```
+
+## How It Works
+
+The component:
+1. Uses the `Intl.DateTimeFormat` API to get the current time in the specified timezone
+2. Calculates the timezone offset between the user's local timezone and the specified timezone
+3. Updates the time every minute automatically
+4. Shows an offset indicator (e.g., "[5h ahead]" or "[3h behind]") if the timezone differs from the user's local timezone
+5. Uses NumberFlow for smooth animated transitions when numbers change
+
+## Timezone Offset Display
+
+The component automatically calculates and displays the time difference:
+- If the specified timezone is the same as the user's local timezone, no offset is shown
+- If different, it displays the hour difference (e.g., `[5h ahead]` or `[3h behind]`)
+- The offset only appears when there's a meaningful difference (> 0 hours)
+
+## Performance
+
+- Updates every 60 seconds (not every second) for efficiency
+- Properly cleans up intervals on unmount
+- Minimal re-renders with optimized state management
+- Lightweight calculation using native browser APIs
+
+## Dependencies
+
+- `@number-flow/react` - For animated number transitions
+- `react` - React hooks (useState, useEffect)
+
+## Browser Support
+
+Works in all modern browsers that support:
+- `Intl.DateTimeFormat` API (all modern browsers)
+- ES6+ features
+- React 18+

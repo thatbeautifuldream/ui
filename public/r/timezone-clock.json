@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "timezone-clock",
+  "title": "Timezone Clock",
+  "description": "A real-time clock component that displays time in any timezone with animated transitions and timezone offset indicators.",
+  "dependencies": [
+    "@number-flow/react"
+  ],
+  "files": [
+    {
+      "path": "src/registry/blocks/timezone-clock/timezone-clock-example.tsx",
+      "content": "\"use client\";\n\nimport { TimezoneClock } from \"@/registry/blocks/timezone-clock/timezone-clock\";\n\nexport function TimezoneClockExample() {\n  return (\n    <div className=\"flex flex-col gap-3\">\n      <h3 className=\"font-medium text-sm text-muted-foreground\">\n        America/New York\n      </h3>\n      <TimezoneClock timezone=\"America/New_York\" />\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/registry/blocks/timezone-clock/timezone-clock.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useState } from \"react\";\nimport NumberFlow from \"@number-flow/react\";\n\nexport function TimezoneClock({\n  timezone = \"Asia/Kolkata\",\n}: {\n  timezone: Intl.DateTimeFormatOptions[\"timeZone\"];\n}) {\n  const [time, setTime] = useState<{ hours: string; minutes: string }>({\n    hours: \"00\",\n    minutes: \"00\",\n  });\n  const [timezoneOffset, setTimezoneOffset] = useState<{\n    diff: number;\n    label: string;\n  } | null>(null);\n\n  useEffect(() => {\n    const updateTime = () => {\n      const resumeTimezone = timezone;\n      const now = new Date();\n\n      const formatter = new Intl.DateTimeFormat(\"en-US\", {\n        timeZone: resumeTimezone,\n        hour: \"2-digit\",\n        minute: \"2-digit\",\n        hour12: false,\n      });\n\n      const parts = formatter.formatToParts(now);\n      const hours = parts.find((p) => p.type === \"hour\")?.value || \"00\";\n      const minutes = parts.find((p) => p.type === \"minute\")?.value || \"00\";\n\n      setTime({ hours, minutes });\n\n      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;\n\n      if (userTimezone !== resumeTimezone) {\n        const getOffset = (tz: string) => {\n          const date = new Date();\n          const utcDate = new Date(\n            date.toLocaleString(\"en-US\", { timeZone: \"UTC\" }),\n          );\n          const tzDate = new Date(\n            date.toLocaleString(\"en-US\", { timeZone: tz }),\n          );\n          return (tzDate.getTime() - utcDate.getTime()) / (1000 * 60);\n        };\n\n        const userOffset = getOffset(userTimezone);\n        const resumeOffset = getOffset(resumeTimezone);\n        const diffInMinutes = userOffset - resumeOffset;\n        const diffInHours = Math.abs(diffInMinutes / 60);\n\n        const label =\n          diffInMinutes > 0\n            ? `${diffInHours}h ahead`\n            : `${diffInHours}h behind`;\n\n        setTimezoneOffset({ diff: diffInHours, label });\n      } else {\n        setTimezoneOffset(null);\n      }\n    };\n\n    updateTime();\n    const interval = setInterval(updateTime, 1000 * 60); // Update every minute\n\n    return () => clearInterval(interval);\n  }, [timezone]);\n\n  return (\n    <div className=\"flex items-center gap-2 font-mono\">\n      <div className=\"flex items-center\">\n        <NumberFlow\n          value={parseInt(time.hours)}\n          format={{ minimumIntegerDigits: 2 }}\n          className=\"tabular-nums\"\n        />\n        <span>:</span>\n        <NumberFlow\n          value={parseInt(time.minutes)}\n          format={{ minimumIntegerDigits: 2 }}\n          className=\"tabular-nums\"\n        />\n      </div>\n      {timezoneOffset && timezoneOffset.diff > 0 && (\n        <span className=\"text-muted-foreground\">[{timezoneOffset.label}]</span>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

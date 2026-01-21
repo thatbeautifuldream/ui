@@ -69,6 +69,23 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "timezone-clock",
+      "type": "registry:component",
+      "title": "Timezone Clock",
+      "description": "A real-time clock component that displays time in any timezone with animated transitions and timezone offset indicators.",
+      "dependencies": ["@number-flow/react"],
+      "files": [
+        {
+          "path": "src/registry/blocks/timezone-clock/timezone-clock-example.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/blocks/timezone-clock/timezone-clock.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

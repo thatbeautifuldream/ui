@@ -3,6 +3,7 @@ import { OpenInV0Button } from "@/components/open-in-v0-button";
 import { cn } from "@/lib/utils";
 import { AnimatedAvatarStackExample } from "@/registry/blocks/animated-avatar-stack/animated-avatar-stack-example";
 import { NestedDrawerExample } from "@/registry/blocks/nested-drawer/nested-drawer-example";
+import { TimezoneClockExample } from "@/registry/blocks/timezone-clock/timezone-clock-example";
 
 const COMPONENTS = [
   {
@@ -19,6 +20,13 @@ const COMPONENTS = [
     component: AnimatedAvatarStackExample,
     minHeight: "min-h-[400px]",
   },
+  {
+    name: "timezone-clock",
+    description:
+      "A real-time timezone clock with animated number transitions and timezone offset display.",
+    component: TimezoneClockExample,
+    minHeight: "min-h-[400px]",
+  },
 ] as const;
 
 export default function HomePage() {
@@ -28,7 +36,7 @@ export default function HomePage() {
         {COMPONENTS.map(
           ({ name, description, component: Component, minHeight }) => (
             <div key={name}>
-              <div className="flex flex-col gap-4 border rounded-lg p-4 min-h-[450px] relative">
+              <div className="flex flex-col gap-4 border bg-accent/40 rounded-lg p-4 min-h-[450px] relative">
                 <div className="flex items-center justify-between">
                   <h2 className="text-sm text-muted-foreground sm:pl-3">
                     {description}
@@ -38,7 +46,7 @@ export default function HomePage() {
                 <div
                   className={cn(
                     "flex items-center justify-center relative",
-                    minHeight
+                    minHeight,
                   )}
                 >
                   <Component />
@@ -46,7 +54,7 @@ export default function HomePage() {
               </div>
               <InstallerTabs componentName={name} />
             </div>
-          )
+          ),
         )}
       </main>
     </div>
